@@ -14,6 +14,23 @@ const useStyles = makeStyles({
 const MovieListPage = (props) => {
     const classes = useStyles();
     const [movies, setMovies] = useState([]);
+    const [nameFilter, setNameFilter] = useState("");
+    const [genreFilter, setGenreFilter] = useState("0");
+  
+    const genreId = Number(genreFilter);
+  
+    let displayedMovies = movies
+      .filter((m) => {
+        return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+      })
+      .filter((m) => {
+        return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+      });
+  
+    const handleChange = (type, value) => {
+      if (type === "name") setNameFilter(value);
+      else setGenreFilter(value);
+    };
   
     useEffect(() => {
       fetch(
@@ -21,15 +38,15 @@ const MovieListPage = (props) => {
       )
         .then((res) => res.json())
         .then((json) => {
-          // console.log(json);
+          //console.log(json);
           return json.results;
         })
         .then((movies) => {
           setMovies(movies);
         });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
