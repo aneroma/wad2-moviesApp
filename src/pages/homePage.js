@@ -1,3 +1,4 @@
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from 'react-query'
@@ -25,9 +26,11 @@ const HomePage = (props) => {
     <PageTemplate
       title="Discover Movies"
       movies={movies}
-      selectFavorite={addToFavorites}
-    />    
-  );
+      action={(movie) => {
+        return <AddToFavoritesIcon movie={movie} />
+      }}
+    />
+);
 };
 
 export default HomePage;
