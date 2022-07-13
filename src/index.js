@@ -1,3 +1,4 @@
+import AddMovieReviewPage from './pages/addMovieReviewPage'
 import MoviesContextProvider from "./contexts/moviesContext";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
@@ -28,6 +29,7 @@ const queryClient = new QueryClient({
           <MoviesContextProvider>
               {" "}
               <Switch>
+              <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                 ........
               </Switch>
           </MoviesContextProvider>
